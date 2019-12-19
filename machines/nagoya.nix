@@ -13,6 +13,7 @@
       ../modules/chat.nix
       ../modules/firefox.nix
       ../modules/jetbrains.nix
+      ../modules/terminal.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
