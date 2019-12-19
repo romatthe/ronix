@@ -12,6 +12,7 @@
       # Applications 
       ../modules/chat.nix
       ../modules/firefox.nix
+      ../modules/jetbrains.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
