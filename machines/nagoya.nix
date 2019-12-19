@@ -8,6 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ../hardware/lenovo-t495.nix
+    
+      # Applications 
+      ../modules/firefox.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
