@@ -11,6 +11,7 @@
     
       # Applications 
       ../modules/chat.nix
+      ../modules/emacs
       ../modules/firefox.nix
       ../modules/jetbrains.nix
       ../modules/terminal.nix
