@@ -10,6 +10,7 @@
       ../hardware/lenovo-t495.nix
     
       # Applications 
+      ../modules/chat.nix
       ../modules/firefox.nix
     ];
 
@@ -19,6 +20,9 @@
 
   # Use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest; 
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nagoya"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
