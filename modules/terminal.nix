@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+  unstable = pkgs.sources.nixpkgs;
 in
 {
   home-manager.users.romatthe = { 
@@ -48,7 +46,7 @@ in
   # Allow installing packages from unstable (for nushell)
   nixpkgs.config = {
     packageOverrides = pkgs: {
-      unstable = import unstableTarball {
+      unstable = import unstable {
         config = config.nixpkgs.config;
       };
     };

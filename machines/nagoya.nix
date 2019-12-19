@@ -9,7 +9,8 @@
     [ # Include the results of the hardware scan.
       ../hardware/lenovo-t495.nix
     
-      # Applications 
+      # Applications
+      ../modules/packages.nix
       ../modules/chat.nix
       ../modules/firefox.nix
       ../modules/jetbrains.nix
