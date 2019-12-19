@@ -1,7 +1,4 @@
 { config, lib, pkgs, ... }:
-let
-  unstable = pkgs.sources.nixpkgs;
-in
 {
   home-manager.users.romatthe = { 
     programs.alacritty = {
@@ -43,14 +40,7 @@ in
 
   };
 
-  # Allow installing packages from unstable (for nushell)
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstable {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
+
 
   environment.systemPackages = with pkgs; [
     unstable.nushell

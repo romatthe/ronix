@@ -6,6 +6,8 @@ in { pkgs, config, lib, ... }: {
       rec {
         inherit sources;
 
+        unstable = import sources.nixpkgs {};
+        
         nur = (import sources.NUR { pkgs = import sources.nixpkgs {}; }).repos;
       })
   ];
