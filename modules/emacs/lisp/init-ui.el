@@ -78,15 +78,12 @@
   :custom
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
+  (doom-themes-treemacs-theme "doom-colors")
   :config
-  (load-theme 'doom-gruvbox t)
-  (doom-themes-treemacs-config)
-  (doom-themes-org-config))
+  (load-theme 'doom-gruvbox t))
 
 ;; Line numbers and columns
 (use-package display-line-numbers
-  :straight nil
-  :blackout t
   :hook (after-init . global-display-line-numbers-mode))
 
 ;; Mouse & Smooth Scroll

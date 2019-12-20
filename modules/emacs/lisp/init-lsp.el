@@ -31,7 +31,6 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :blackout t
   :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
   :hook ((c-mode c++-mode java-mode rust-mode) . lsp)
   :custom
@@ -46,7 +45,6 @@
 
 (use-package lsp-ui
   :after lsp-mode
-  :blackout t
   :commands lsp-ui-mode
   :custom-face
   (lsp-ui-doc-background ((t (:background nil))))
@@ -73,13 +71,6 @@
 
 (use-package dap-mode
   :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
-
-(use-package dap-mode
-  :after lsp-mode
-  :blackout t
   :bind (:map dap-mode-map
               (("<f12>" . dap-debug)
                ("<f8>" . dap-continue)
@@ -99,7 +90,6 @@
 (use-package ccls
   :after projectile
   :demand t
-  :ensure-system-package ccls
   :custom
   (ccls-sem-highlight-method 'font-lock)
   (ccls-args nil)

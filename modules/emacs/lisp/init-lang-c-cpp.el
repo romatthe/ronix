@@ -62,8 +62,9 @@
     "Switches to the *compilation* buffer after compilation."
     (other-window 1))
   :bind ([remap comment-region] . cmake-ide-compile)
-  :init (cmake-ide-setup)
-  :config (advice-add 'cmake-ide-compile :after #'my/switch-to-compilation-window))
+  :config
+  (advice-add 'cmake-ide-compile :after #'my/switch-to-compilation-window)
+  (cmake-ide-setup))
 
 
 (provide 'init-lang-c-cpp)

@@ -39,7 +39,6 @@
 
 ;; Highlight matching parens
 (use-package paren
-  :straight nil
   :hook (after-init . show-paren-mode)
   :custom
   (show-paren-when-point-inside-paren t)

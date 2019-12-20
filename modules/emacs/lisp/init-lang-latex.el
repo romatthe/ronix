@@ -51,7 +51,6 @@
 (use-package auctex)
 
 (use-package tex
-  :straight nil
   :mode ("\\.tex\\'" . latex-mode)
   :config
   (setq-default TeX-engine 'xetex)

@@ -31,7 +31,6 @@
 ;;; Code:
 
 (use-package ivy
-  :blackout t
   :bind (("C-s" . swiper-isearch)
          ("C-S-s" . swiper-all))
   :custom
@@ -41,7 +40,6 @@
   (ivy-mode t))
 
 (use-package counsel
-  :blackout t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          :map help-map
@@ -82,8 +80,8 @@
   :custom
   (ivy-count-format "%d/%d " "Show anzu-like counter")
   (ivy-use-selectable-prompt t "Make the prompt line selectable")
-  :init
-  (counsel-mode))
+  :config
+  (counsel-mode t))
 
 ;; Additional key bindings for Ivy
 (use-package ivy-hydra
@@ -96,7 +94,7 @@
   :after (counsel projectile)
   :custom
   (counsel-projectile-grep-initial-input '(ivy-thing-at-point))
-  :init
+  :config
   (counsel-projectile-mode 1))
 
 ;; Integrate yasnippet

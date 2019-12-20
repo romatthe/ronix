@@ -89,7 +89,7 @@
 (require 'init-lang-clojure)
 (require 'init-lang-go)
 (require 'init-lang-haskell)
-(require 'init-lang-latex)
+;;(require 'init-lang-latex)
 (require 'init-lang-markdown)
 (require 'init-lang-nix)
 (require 'init-lang-rust)

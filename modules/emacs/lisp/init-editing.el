@@ -36,7 +36,6 @@
 
 ;; How to handle two buffers with the same name
 (use-package uniquify
-  :straight nil
   :custom
   (uniquify-buffer-name-style 'forward)
   (uniquify-separator "/")
@@ -46,7 +45,6 @@
 ;; Emacs pseudo packages allows us to config variables defined in C code
 ;; through `use-package`.
 (use-package emacs
-  :straight nil
   :custom
   (delete-by-moving-to-trash t "Deleting files go to OS's trash folder")
   (tab-width 4 "Default tab width")
@@ -54,22 +52,18 @@
 
 ;; Try to keep Emacs from littering stuff all over the place
 (use-package files
-  :straight nil
   :custom
   (make-backup-files nil "Stop making backup files")
   (auto-save-default nil "Disable auto save"))
 
 ;; Delete selection if you insert
 (use-package delsel
-  :straight t
   :demand t
   :config (delete-selection-mode))
 
 ;; Automatically reload files was modified by external program
 (use-package autorevert
-  :straight nil
   :demand t
-  :blackout t
   :config
   (global-auto-revert-mode))
 
@@ -119,7 +113,6 @@
 
 ;; Move pieces of text around
 (use-package drag-stuff
-  :blackout t
   :bind (("M-S-<up>" .    drag-stuff-up)
          ("M-S-<down>" .  drag-stuff-down)
          ("M-S-<left>" .  drag-stuff-left)
@@ -130,8 +123,6 @@
 
 ;; Automatic parenthesis pairing
 (use-package elec-pair
-  :straight nil
-  :blackout t
   :hook (after-init . electric-pair-mode)
   :custom
   (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
@@ -153,7 +144,6 @@
 
 ;; Treat undo history as a tree
 (use-package undo-tree
-  :blackout
   :hook (after-init . global-undo-tree-mode)
   :bind (("C-z" . undo-tree-undo)
          ("C-x u" . undo-tree-undo-visualize))
@@ -166,7 +156,6 @@
 
 ;; Handling capitalized subwords in a nomenclature
 (use-package subword
-  :blackout
   :hook ((prog-mode . subword-mode)
          (minibuffer-setup . subword-mode)))
 

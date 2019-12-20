@@ -39,9 +39,14 @@
   :hook (after-init . magit-todos-mode))
 
 ;; Git related modes
-(use-package gitattributes-mode)
-(use-package gitconfig-mode)
-(use-package gitignore-mode)
+(use-package gitattributes-mode
+  :defer t)
+
+(use-package gitconfig-mode
+  :defer t)
+
+(use-package gitignore-mode
+  :defer t)
 
 
 (provide 'init-git)

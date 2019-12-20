@@ -31,7 +31,6 @@
 ;;; Code:
 
 (use-package company
-  :blackout t
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
   :commands company-abort
   :bind (("C-SPC" . company-manual-begin)
@@ -56,7 +55,6 @@
   :hook (company-mode . company-box-mode))
 
 (use-package company-box
-  :blackout
   :functions (my-company-box--make-line my-company-box-icons--elisp)
   :hook (company-mode . company-box-mode)
   :custom

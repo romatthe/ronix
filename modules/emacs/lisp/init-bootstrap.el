@@ -32,9 +32,8 @@
 
 ;; Now that we have `use-package`, we can use the Garbage Collection Magic Trick
 (use-package gcmh
-  :straight t
   :demand t
-  :init
+  :config
   (gcmh-mode 1))
 
 ;; Package `bind-key' provides a macro by the same name (along with
@@ -43,15 +42,6 @@
 ;; `define-key' and `global-set-key' do. It's also the same API that
 ;; `:bind' and similar keywords in `use-package' use.
 (use-package bind-key
-  :demand t)
-
-;; Package `blackout' provides a convenient function for customizing
-;; mode lighters. It supports both major and minor modes with the same
-;; interface, and includes `use-package' integration. The features are
-;; a strict superset of those provided by similar packages `diminish',
-;; `delight', and `dim'.
-(use-package blackout
-  :straight (:host github :repo "raxod502/blackout")
   :demand t)
 
 (provide 'init-bootstrap)

@@ -32,7 +32,6 @@
 
 ;; Defer the existing lisp-mode in Emacs
 (use-package lisp-mode
-  :straight nil
   :defer t)
 
 ;; This requires a functional Roswell installation as well as having SLIME installed
@@ -42,7 +41,7 @@
   :custom
   (inferior-lisp-program "ros -Q run" "Preferred Common Lisp implementation")
   :config
-  (load (expand-file-name "~/.roswell/helper.el"))
+  ;; FIXME (load (expand-file-name "~/.roswell/helper.el"))
   (use-package rainbow-delimiters
     :hook (sly-mode . rainbow-delimiters-mode))
   (use-package sly-company

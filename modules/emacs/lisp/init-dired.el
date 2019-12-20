@@ -32,7 +32,6 @@
 
 ;; Directory operations
 (use-package dired
-  :straight nil
   :bind (:map dired-mode-map
          ("C-c C-p" . wdired-change-to-wdired-mode))
   :config
@@ -47,11 +46,10 @@
 
   ;; Colourful dired
   (use-package diredfl
-    :init (diredfl-global-mode 1))
+    :config (diredfl-global-mode 1))
 
   ;; Shows icons
   (use-package all-the-icons-dired
-    :blackout t
     :custom-face (all-the-icons-dired-dir-face ((t (:foreground nil))))
     :hook (dired-mode . all-the-icons-dired-mode)
     :config

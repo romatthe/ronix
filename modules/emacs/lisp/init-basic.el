@@ -41,7 +41,6 @@
   (exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
   (exec-path-from-shell-arguments '("-l"))
-  :init
   (exec-path-from-shell-initialize))
 
 ;; History
