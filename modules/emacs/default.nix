@@ -103,6 +103,11 @@
         ];
     };
 
+
+    home.file.".emacs.d/init.el".source = ./init.el;
+    home.file.".emacs.d/lisp/".source = ./lisp;
+    home.file.".emacs.d/img/".source = ./img;
+
     services.emacs.enable = true;
 
     home.activation.emacs = {
