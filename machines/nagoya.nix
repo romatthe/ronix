@@ -13,6 +13,7 @@
       ../modules/packages.nix
       ../modules/chat.nix
       ../modules/firefox.nix
+      ../modules/games.nix
       ../modules/jetbrains.nix
       ../modules/emacs
       ../modules/terminal
