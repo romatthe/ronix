@@ -12,10 +12,10 @@
       # Applications
       ../modules/packages.nix
       ../modules/chat.nix
-      ../modules/emacs
       ../modules/firefox.nix
       ../modules/jetbrains.nix
-      ../modules/terminal.nix
+      ../modules/emacs
+      ../modules/terminal
     ];
 
   # Use the systemd-boot EFI boot loader.
