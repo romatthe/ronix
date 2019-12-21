@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   home-manager.users.romatthe = {
-    home.packages = [
+    home.packages = with pkgs; [
       pkgs.brogue
       pkgs.cataclysm-dda
       pkgs.crawl
@@ -12,6 +12,8 @@
       pkgs.openttd
       pkgs.openxcom
       pkgs.wesnoth
+
+      pkgs.lutris
     ];
   };
 }
