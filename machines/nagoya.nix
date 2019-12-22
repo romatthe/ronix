@@ -9,14 +9,15 @@
     [ # Include the results of the hardware scan.
       ../hardware/lenovo-t495.nix
     
-      # Applications
+      # Modules
+      ../modules/emacs
+      ../modules/gnome
+      ../modules/terminal
       ../modules/packages.nix
       ../modules/chat.nix
       ../modules/firefox.nix
       ../modules/games.nix
       ../modules/jetbrains.nix
-      ../modules/emacs
-      ../modules/terminal
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -30,7 +31,6 @@
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nagoya"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -91,11 +91,7 @@
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = false;
-  services.xserver.desktopManager.gnome3.enable = true;
-
+  # Enable dbus support
   services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
