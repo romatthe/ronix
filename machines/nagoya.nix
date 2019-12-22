@@ -13,6 +13,7 @@
       ../modules/emacs
       ../modules/gnome
       ../modules/terminal
+      #../modules/xmonad
       ../modules/chat.nix
       ../modules/firefox.nix
       ../modules/games.nix
