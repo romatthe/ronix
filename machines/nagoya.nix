@@ -13,11 +13,12 @@
       ../modules/emacs
       ../modules/gnome
       ../modules/terminal
-      ../modules/packages.nix
       ../modules/chat.nix
       ../modules/firefox.nix
       ../modules/games.nix
+      ../modules/git.nix
       ../modules/jetbrains.nix
+      ../modules/packages.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
