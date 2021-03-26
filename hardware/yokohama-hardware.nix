@@ -13,18 +13,24 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.luks.devices.luksroot = {
+    device = "/dev/disk/by-uuid/12c76b84-f8e7-44ab-bf84-9a63f2ac80e3"; 
+    preLVM = true;
+    allowDiscards = true;
+  };
+
   fileSystems."/" =
-    { device = "/dev/mapper/vg-root";
+    { device = "/dev/disk/by-uuid/b08c6911-e705-411b-a296-5ad4c38db58b";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8117-02D8";
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/1E88-00B2";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/2ef652a3-8b72-45a4-ba57-675d13649ab2"; }
+    [ { device = "/dev/disk/by-uuid/841c951b-ea86-4a1e-a7a4-fc8196d77457"; }
     ];
 
 }
