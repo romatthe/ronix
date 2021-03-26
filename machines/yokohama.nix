@@ -5,7 +5,7 @@
 { config, pkgs, inputs, ... }:
 
 let
-    nixos-unstable = import inputs.nixos-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
+    nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
 in
 {
   imports =
@@ -14,7 +14,7 @@ in
     ];
 
   nix = {
-    package = nixos-unstable.nixFlakes;
+    package = nixpkgs-unstable.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -84,10 +84,10 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   wget vim
-  #   firefox
-  # ];
+  environment.systemPackages = with pkgs; [
+    wget vim git htop
+    firefox
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
