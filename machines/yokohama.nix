@@ -30,6 +30,16 @@ in
     enable = true;
     theme.name = "adwaita-dark";
   };
+ 
+  home-manager.users.romatthe.programs.zsh.enable = true;
+
+  home-manager.users.romatthe.programs.firefox = {
+    enable = true;
+    extensions =
+      with pkgs.nur.repos.rycee.firefox-addons; [
+        nur.repos.rycee.bitwarden
+      ];
+  };
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
@@ -94,7 +104,6 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget vim git htop
-    firefox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
