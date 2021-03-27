@@ -13,6 +13,9 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... } @ inputs: {
 
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+
     nixosConfigurations = {
       
       # Yokohama, home desktop workhorse
@@ -20,7 +23,11 @@
         system = "x86_64-linux";
         modules = [
           inputs.home-manager.nixosModules.home-manager 
-          (import ./machines/yokohama.nix) ];
+
+          (import ./hardware/yokohama-hardware.nix)
+          (import ./machines/yokohama.nix)
+          (import ./machines/yokohama-home.nix)
+        ];
         specialArgs = { inherit inputs; };
       };
 

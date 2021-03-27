@@ -8,11 +8,6 @@ let
     nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../hardware/yokohama-hardware.nix
-    ];
-
   nix = {
     package = nixpkgs-unstable.nixFlakes;
     extraOptions = ''
@@ -22,24 +17,6 @@ in
 
   # Forgive me Stallman
   nixpkgs.config = { allowUnfree = true; };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  # home-manager.users.romatthe.programs.zsh.enable = true;
-  home-manager.users.romatthe.gtk = {
-    enable = true;
-    theme.name = "adwaita-dark";
-  };
- 
-  home-manager.users.romatthe.programs.zsh.enable = true;
-
-  home-manager.users.romatthe.programs.firefox = {
-    enable = true;
-    extensions =
-      with pkgs.nur.repos.rycee.firefox-addons; [
-        nur.repos.rycee.bitwarden
-      ];
-  };
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
