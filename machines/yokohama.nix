@@ -23,6 +23,14 @@ in
   # Forgive me Stallman
   nixpkgs.config = { allowUnfree = true; };
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  # home-manager.users.romatthe.programs.zsh.enable = true;
+  home-manager.users.romatthe.gtk = {
+    enable = true;
+    theme.name = "adwaita-dark";
+  };
+
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

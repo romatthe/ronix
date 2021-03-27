@@ -17,7 +17,9 @@
       # Yokohama, home desktop workhorse
       yokohama = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ (import ./machines/yokohama.nix) ];
+        modules = [
+          inputs.home-manager.nixosModules.home-manager 
+          (import ./machines/yokohama.nix) ];
         specialArgs = { inherit inputs; };
       };
 
