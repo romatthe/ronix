@@ -36,9 +36,28 @@
         ];
         specialArgs = { inherit inputs; };
       };
+
+      # Hiroshima, cheap laptop at home
+      hiroshima = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.home-manager.nixosModules.home-manager 
+          
+          { nixpkgs.overlays = [ 
+              inputs.emacs.overlay
+              inputs.nur.overlay 
+            ]; 
+          }
+
+          (import ./hardware/hiroshima-hardware.nix)
+          (import ./machines/hiroshima.nix)
+        ];
+        specialArgs = { inherit inputs; };
+      };
     };
 
     yokohama = self.nixosConfigurations.yokohama.config.system.build.toplevel;
+    hiroshima = self.nixosConfigurations.hiroshima.config.system.build.toplevel;
 
   };
 }
