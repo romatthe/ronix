@@ -117,10 +117,20 @@
         "ls" = ''ls --color=auto'';
         "ll" = ''ls -la --color=auto'';
       };
+      initExtra = ''
+        eval "$(starship init zsh)"
+        eval `${pkgs.coreutils}/bin/dircolors "${./dircolors}"`
+
+        bindkey "^[[1;5C" forward-word    
+        bindkey "^[[1;5D" backward-word
+        bindkey "^[^[[D" forward-word
+        bindkey "^[^[[C" backward-word
+      '';
     };
 
     home.packages = with pkgs; [
       pkgs.neofetch
+      pkgs.starship
     ];
 
   };

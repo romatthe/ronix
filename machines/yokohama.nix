@@ -10,10 +10,10 @@ in
 {
   imports = [
     ../modules/emacs
+    ../modules/terminal
     ../modules/firefox.nix
     ../modules/git.nix
     ../modules/gnome.nix
-    ../modules/terminal.nix
   ];
   
   nix = {
