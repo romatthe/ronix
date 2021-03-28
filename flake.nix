@@ -33,7 +33,6 @@
 
           (import ./hardware/yokohama-hardware.nix)
           (import ./machines/yokohama.nix)
-          (import ./machines/yokohama-home.nix)
         ];
         specialArgs = { inherit inputs; };
       };

@@ -9,6 +9,10 @@ let
 in
 {
   imports = [
+    ../modules/emacs
+    ../modules/firefox.nix
+    ../modules/git.nix
+    ../modules/gnome.nix
     ../modules/terminal.nix
   ];
   
@@ -58,16 +62,8 @@ in
     keyMap = "us";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME 3 Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-
   # Configure keymap in X11
   services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable sound.
   sound.enable = true;
