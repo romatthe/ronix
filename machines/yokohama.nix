@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    ../modules/shell.nix
+    ../modules/terminal.nix
   ];
   
   nix = {
