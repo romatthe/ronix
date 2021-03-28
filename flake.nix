@@ -37,7 +37,6 @@
         ];
         specialArgs = { inherit inputs; };
       };
-
     };
 
     yokohama = self.nixosConfigurations.yokohama.config.system.build.toplevel;

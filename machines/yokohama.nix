@@ -8,6 +8,10 @@ let
     nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
 in
 {
+  imports = [
+    ../modules/shell.nix
+  ];
+  
   nix = {
     package = nixpkgs-unstable.nixFlakes;
     extraOptions = ''

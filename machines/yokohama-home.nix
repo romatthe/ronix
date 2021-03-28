@@ -28,7 +28,10 @@
     programs.emacs = {
       enable = true;
       package = pkgs.emacsGcc;
-      extraPackages = (epkgs: [ epkgs.vterm ] );
+      extraPackages = (epkgs: [ 
+        epkgs.vterm
+        epkgs.nix-mode
+      ]);
     };
 
     # Git
