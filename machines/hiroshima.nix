@@ -14,6 +14,7 @@ in
     ../modules/firefox.nix
     ../modules/git.nix
     ../modules/gnome.nix
+    ../modules/virt.nix
   ];
 
   nix = {
