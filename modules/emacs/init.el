@@ -48,9 +48,6 @@
 (use-package swiper
   :ensure t)
 
-(use-package counsel
-  :ensure t)
-
 (use-package ivy
   :diminish
   :ensure t
@@ -70,8 +67,49 @@
   :config
   (ivy-mode 1))
 
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
+  :init
+  (counsel-mode 1))
+
+
 ;; Use doom-modeline
 (use-package doom-modeline
   :ensure t
   :init
   (doom-modeline-mode 1))
+
+;; Use doom-themes
+(use-package doom-themes)
+
+;; Matching colored delimmiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Prompt for available keys
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+;; Nicer help
+(use-package helpful
+  :ensure t
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command]  . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key]      . helpful-key))
