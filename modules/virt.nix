@@ -6,6 +6,6 @@
     dockerCompat = true;
   };
 
-  virtualisation.oci-container.backend = "podman";
+  virtualisation.oci-containers.backend = "podman";
   virtualisation.libvirtd.enable = true;
 }

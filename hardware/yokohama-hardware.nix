@@ -9,29 +9,22 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.initrd.luks.devices.luksroot = {
-    device = "/dev/disk/by-uuid/12c76b84-f8e7-44ab-bf84-9a63f2ac80e3"; 
-    preLVM = true;
-    allowDiscards = true;
-  };
-
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b08c6911-e705-411b-a296-5ad4c38db58b";
+    { device = "/dev/disk/by-uuid/c1131fca-df0d-47c6-a3e5-0d66bc89c5e4";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/1E88-00B2";
+    { device = "/dev/disk/by-uuid/8DDD-C3FF";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/841c951b-ea86-4a1e-a7a4-fc8196d77457"; }
+    [ { device = "/dev/disk/by-uuid/e6526f13-9e3a-4258-bd71-9133a73e54a6"; }
     ];
 
 }
-
