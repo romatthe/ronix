@@ -11,6 +11,7 @@ in
   imports = [
     ../modules/emacs
     ../modules/terminal
+    ../modules/chat.nix
     ../modules/firefox.nix
     ../modules/git.nix
     ../modules/gnome.nix
