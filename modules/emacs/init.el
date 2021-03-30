@@ -81,6 +81,9 @@
   :init
   (counsel-mode 1))
 
+(global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
+
+(use-package all-the-icons)
 
 ;; Use doom-modeline
 (use-package doom-modeline
@@ -89,7 +92,9 @@
   (doom-modeline-mode 1))
 
 ;; Use doom-themes
-(use-package doom-themes)
+(use-package doom-themes
+  :init
+  (load-theme 'doom-one t))
 
 ;; Matching colored delimmiters
 (use-package rainbow-delimiters
@@ -113,3 +118,4 @@
   ([remap describe-command]  . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key]      . helpful-key))
+
