@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
+    nixpkgs-extra.url = "github:romatthe/nixpkgs-extra";
     nur.url = "github:nix-community/NUR";
     emacs.url = "github:nix-community/emacs-overlay";
     home-manager = {
@@ -12,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nur, ... } @ inputs: {
+  outputs = { self, nixpkgs, nixpkgs-extra, nixpkgs-unstable, nur, ... } @ inputs: {
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
@@ -27,6 +28,7 @@
           
           { nixpkgs.overlays = [ 
               inputs.emacs.overlay
+              inputs.nixpkgs-extra.overlay
               inputs.nur.overlay 
             ]; 
           }
@@ -45,6 +47,7 @@
           
           { nixpkgs.overlays = [ 
               inputs.emacs.overlay
+              inputs.nixpkgs-extra.overlay
               inputs.nur.overlay 
             ]; 
           }
