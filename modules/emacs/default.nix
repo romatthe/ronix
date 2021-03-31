@@ -9,7 +9,8 @@
     programs.emacs = {
       enable = true;
       package = pkgs.emacsGcc;
-      extraPackages = (epkgs: [ 
+      extraPackages = (epkgs: [
+        epkgs.auctex
         epkgs.vterm
         epkgs.nix-mode
       ]);
