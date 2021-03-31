@@ -72,13 +72,17 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "narHash": "sha256-yVzIBJv0PFqAPELlet8p0cyUoSiVKPXJL4H83VooEGU=",
-        "path": "/home/romatthe/Source/nixpkgs-extra",
-        "type": "path"
+        "lastModified": 1617166935,
+        "narHash": "sha256-VNK7eNQ3/mjq8I6jOgVTPVVYSn3fQcDxAlmhvEOdWQA=",
+        "owner": "romatthe",
+        "repo": "nixpkgs-extra",
+        "rev": "843d64efc02dda1fc9d5ebc540307aec6d7a6b14",
+        "type": "github"
       },
       "original": {
-        "path": "/home/romatthe/Source/nixpkgs-extra",
-        "type": "path"
+        "owner": "romatthe",
+        "repo": "nixpkgs-extra",
+        "type": "github"
       }
     },
     "nixpkgs-unstable": {
