@@ -16,6 +16,14 @@
 ;; Set a theme, for now
 (load-theme 'wombat t)
 
+;; Take care of the backup files, they can be a mess
+(setq backup-directory-alist `(("." . "~/.saves"))
+      backup-by-copying t
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
 ;; Let's set up use-package
 (require 'package)
 
