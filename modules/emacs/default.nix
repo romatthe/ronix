@@ -10,7 +10,7 @@
       enable = true;
       package = pkgs.emacsGcc;
       extraPackages = (epkgs: [
-        epkgs.auctex
+        #epkgs.auctex
         epkgs.vterm
         epkgs.nix-mode
       ]);
