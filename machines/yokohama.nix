@@ -17,7 +17,7 @@ in
     ../modules/gnome.nix
     ../modules/jetbrains.nix
     ../modules/music.nix
-    ../modules/sway.nix
+    #../modules/sway.nix
     ../modules/virt.nix
   ];
   

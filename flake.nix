@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-extra, nixpkgs-unstable, nur, ... } @ inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nur, ... } @ inputs: {
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
