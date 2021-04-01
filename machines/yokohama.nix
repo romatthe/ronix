@@ -35,13 +35,6 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  #boot.loader.grub = {
-  #  enable = true;
-  #  device = "nodev";
-  #  version = 2;
-  #  efiSupport = true;
-  #  enableCryptodisk = true;
-  #};
 
   # Grub menu is painted really slowly on HiDPI, so we lower the
   # resolution. Unfortunately, scaling to 1280x720 (keeping aspect

@@ -18,9 +18,6 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nur, ... } @ inputs: {
 
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-
     nixosConfigurations = {
       
       # Yokohama, home desktop workhorse
