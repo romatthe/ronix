@@ -14,6 +14,7 @@ in
     #../modules/sway/waybar.nix
     ../modules/terminal
     ../modules/chat.nix
+    ../modules/dir-env.nix
     ../modules/firefox.nix
     ../modules/git.nix
     ../modules/gnome.nix
@@ -26,6 +27,8 @@ in
     package = nixpkgs-unstable.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
   };
 
@@ -82,7 +85,6 @@ in
   environment.systemPackages = with pkgs; [
     wget vim git htop
   ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
