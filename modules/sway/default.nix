@@ -2,10 +2,10 @@
 
 {
   # Use GDM as the display manager, but enable Wayland support
-  services.xserver.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
+  #services.xserver.displayManager.gdm = {
+  #  enable = true;
+  #  wayland = true;
+  #};
   
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
