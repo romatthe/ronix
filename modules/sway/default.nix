@@ -1,6 +1,12 @@
 { config, pkgs, inputs, ... }:
 
 {
+  # Use GDM as the display manager, but enable Wayland support
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
+  
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -14,21 +20,21 @@
     ];
 
     home.file.".config/swaylock" = {
-      source = ../config/swaylock;
+      source = ./swaylock;
       recursive = true;
     };
 
     gtk.enable = true;
-    gtk.font.name = "SF Pro Display 11";
+    gtk.font.name = "Roboto 11";
     gtk.gtk2.extraConfig = ''
       gtk-cursor-theme-name = "capitaine-cursors";
     '';                     
     gtk.gtk3.extraConfig = {
       gtk-cursor-theme-name = "capitaine-cursors";
     };
-    gtk.iconTheme.package = iconTheme;
+    gtk.iconTheme.package = pkgs.nixpkgs-extra.whitesur-icon-theme;
     gtk.iconTheme.name = "WhiteSur-icon-theme";
-    gtk.theme.package = theme;
+    gtk.theme.package = pkgs.nixpkgs-extra.whitesur-gtk-theme;
     gtk.theme.name = "WhiteSur-gtk-theme-light";
 
     wayland.windowManager.sway = {
@@ -36,8 +42,8 @@
       package = pkgs.nixpkgs-extra.sway-borders;
       wrapperFeatures.gtk = true;
       
-      config = {
-        bars = [{ command = "waybar" }];
+      config = {        
+        bars = [{ command = "waybar"; }];
         fonts = [ "Font Awesome 5 Free 11" "Roboto 11" ];
         gaps.inner = 25;
         input."type:keyboard" = {
@@ -72,11 +78,12 @@
     
       extraConfig = ''
         seat seat0 xcursor_theme capitaine-cursors 24
-        border_images.focused ${../config/border.png}
-        border_images.focused_inactive ${../config/border.png}
-        border_images.unfocused ${../config/border.png}
-        border_images.urgent ${../config/border.png}
-      ''
+        border_images.focused ${./background/border.png}
+        border_images.focused_inactive ${./background/border.png}
+        border_images.unfocused ${./background/border.png}
+        border_images.urgent ${./background/border.png}
+      '';
+      
       extraSessionCommands = ''
         export XDG_SESSION_TYPE=wayland
         export XDG_SESSION_DESKTOP=sway

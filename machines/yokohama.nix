@@ -10,14 +10,14 @@ in
 {
   imports = [
     ../modules/emacs
+    ../modules/sway
     ../modules/terminal
     ../modules/chat.nix
     ../modules/firefox.nix
     ../modules/git.nix
-    ../modules/gnome.nix
+    #../modules/gnome.nix
     ../modules/jetbrains.nix
     ../modules/music.nix
-    #../modules/sway.nix
     ../modules/virt.nix
   ];
   
