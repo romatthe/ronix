@@ -1,9 +1,40 @@
 { pkgs, ... }:
 
+let
+  build-script = import ./build-script.nix;
+  
+  mediaplayer = build-script pkgs "mediaplayer" ./waybar/mediaplayer {
+    playerctl = "${pkgs.playerctl}/bin/playerctl";
+    pango-escape-text = "${pango-escape-text}/bin/pango_escape_text";
+  };
+  
+  pango-escape-text = build-script pkgs "pango_escape_text" ./waybar/pango-escape-text {
+    python = "${(pkgs.python38.buildEnv.override {
+      extraLibs = with pkgs.python38Packages; [ pygobject3 ];
+    })}/bin/python";
+  };
+  
+  play-pause = build-script pkgs "play-pause" ./waybar/play-pause {
+    playerctl = "${pkgs.playerctl}/bin/playerctl";
+  };
+  
+  media = { number } : {
+    format = "{icon} {}";
+    return-type = "json";
+    max-length = 55;
+    format-icons = {
+      Playing = "";
+      Paused = "";
+    };
+    exec = "${mediaplayer}/bin/mediaplayer ${number}";
+    exec-if = "[ $(${pkgs.playerctl}/bin/playerctl -l | wc -l) -ge ${number} ]";
+    interval = 1;
+    on-click = "${play-pause}/bin/play-pause ${number}";
+  };
+in
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-
   home-manager.users.romatthe = {
 
     programs.waybar = {
@@ -97,7 +128,7 @@
           };
         };
       }];
-      style = builtins.readFile ../config/waybar/style.css;
+      style = builtins.readFile ./waybar/style.css;
     };
     
   };

@@ -11,6 +11,7 @@ in
   imports = [
     ../modules/emacs
     ../modules/sway
+    ../modules/sway/waybar.nix
     ../modules/terminal
     ../modules/chat.nix
     ../modules/firefox.nix
