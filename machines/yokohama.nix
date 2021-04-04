@@ -20,6 +20,7 @@ in
     ../modules/gnome.nix
     ../modules/jetbrains.nix
     ../modules/music.nix
+    ../modules/programming.nix
     ../modules/virt.nix
   ];
   
