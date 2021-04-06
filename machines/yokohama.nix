@@ -13,11 +13,16 @@ in
     #../modules/sway
     #../modules/sway/waybar.nix
     ../modules/terminal
+    ../modules/xmonad
+    ../modules/xmonad/compositor
+    ../modules/xmonad/dunst
+    ../modules/xmonad/lockscreen
+    ../modules/xmonad/polybar
     ../modules/chat.nix
     ../modules/dir-env.nix
     ../modules/firefox.nix
     ../modules/git.nix
-    ../modules/gnome.nix
+    #../modules/gnome.nix
     ../modules/jetbrains.nix
     ../modules/music.nix
     ../modules/programming.nix
