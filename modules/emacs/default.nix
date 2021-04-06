@@ -13,8 +13,11 @@
         #epkgs.auctex
         epkgs.vterm
         epkgs.nix-mode
+        epkgs.haskell-mode
       ]);
     };
+
+    home.file.".emacs.d/init.el" = { source = ./init.el; recursive = true; };
   };
 
   fonts.fonts = with pkgs; [
