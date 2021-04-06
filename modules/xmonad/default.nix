@@ -30,6 +30,13 @@ in
       enable = true;
       layout = "us";
 
+      #xrandrHeads = [
+      #  {
+      #    output = "DP-1";
+      #    primary = true;
+      #  }
+      #];
+
       # Touchpad for laptop support
       libinput = {
         enable = true;
@@ -41,6 +48,11 @@ in
         gdm.enable = true;
         gdm.wayland = false;
         defaultSession = "none+xmonad";
+        # TODO: This fixes the selection of the correct monitor at startup, but it isn't very flexible
+        #setupCommands = ''
+        sessionCommands = ''
+          ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-1 --off --output DP-1 --primary --mode 3440x1400 --rate 100
+        '';
       };
 
       windowManager.xmonad = {

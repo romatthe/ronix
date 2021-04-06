@@ -1,4 +1,4 @@
-;==========================================================
+
 ;
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
@@ -32,7 +32,7 @@ include-file = ~/.config/polybar/colors.ini
 ;alert = #bd2c40
 
 [bar/nixos]
-monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:DP-1}
 width = 100%
 height = 64
 ;offset-x = 1%
