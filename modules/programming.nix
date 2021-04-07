@@ -11,6 +11,9 @@
       pkgs.glibc
       pkgs.gnumake
       pkgs.cmake
+
+      # Go
+      pkgs.go
       
       # Rust
       pkgs.rustup

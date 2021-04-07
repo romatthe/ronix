@@ -12,10 +12,22 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.romatthe = {
+    dconf.settings = {
+      # Disable common navigating keys in Jetbrains IDEs
+      "org/gnome/desktop/wm/keybindings" = {
+        switch-to-workspace-left = [ "" ];
+        switch-to-workspace-right = [ "" ];
+      };
+    };
+    
     gtk = {
       enable = true;
       theme.package = pkgs.gnome3.gnome_themes_standard;
       theme.name = "Adwaita-dark";
     };
+
+    home.packages = [
+      pkgs.gnome3.gnome-tweak-tool
+    ];
   };
 }
