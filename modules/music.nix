@@ -6,6 +6,7 @@
 
   home-manager.users.romatthe = {
     home.packages = [
+      pkgs.sublime-music
       pkgs.spotify
     ];
   };   

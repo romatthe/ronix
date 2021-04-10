@@ -6,6 +6,8 @@
 
   home-manager.users.romatthe = {
     home.packages = [
+      pkgs.discord
+      pkgs.fractal
       pkgs.signal-desktop
     ];
   };   

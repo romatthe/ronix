@@ -7,6 +7,7 @@
   home-manager.users.romatthe = {
     home.packages = [
       # Build-essentials
+      pkgs.binutils
       pkgs.gcc
       pkgs.glibc
       pkgs.gnumake
