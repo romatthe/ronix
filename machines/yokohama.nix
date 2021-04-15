@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
     imports = [
-        ../hardware/yokohame-hardware.nix
+        ../hardware/yokohama-hardware.nix
 #    ../modules/emacs
     #../modules/sway
     #../modules/sway/waybar.nix
