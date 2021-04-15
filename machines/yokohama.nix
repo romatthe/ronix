@@ -1,14 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
-#let
-#    nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
-#in
+{ config, pkgs, ... }:
 {
-  imports = [
+    imports = [
+        ../hardware/yokohame-hardware.nix
 #    ../modules/emacs
     #../modules/sway
     #../modules/sway/waybar.nix
@@ -27,86 +20,107 @@
 #    ../modules/music.nix
 #    ../modules/programming.nix
 #    ../modules/virt.nix
-  ];
+    ];
 
-  # Forgive me Stallman
-  nixpkgs.config = { allowUnfree = true; };
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    # Hostname
+    networking.hostName = "yokohama"; # Define your hostname.
 
-  # Grub menu is painted really slowly on HiDPI, so we lower the
-  # resolution. Unfortunately, scaling to 1280x720 (keeping aspect
-  # ratio) doesn't seem to work, so we just pick another low one.
-  #boot.loader.grub.gfxmodeEfi = "1024x768";
+    # Set your time zone.
+    time.timeZone = "Europe/Brussels";
 
-  # Hostname
-  networking.hostName = "yokohama"; # Define your hostname.
+    # Hopefully this will cover all wifi setups
+    hardware.enableRedistributableFirmware = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Brussels";
+    # Automatically update CPU microcode
+    hardware.cpu.amd.updateMicrocode = true;
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp34s0.useDHCP = true;
+    # OpenGL support
+    hardware.opengl.enable = true;
+    hardware.opengl.driSupport = true;
+    hardware.opengl.driSupport32Bit = true;
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    networking = {
+        dhcpcd.enable = false;
+        useNetworkd = true;
+        useDHCP = false;
+        interfaces.enp34s0.useDHCP = true;
+        networkmanager = {
+          enable = true;
+          dns = "systemd-resolved";
+        };
+    };
 
-  # Configure keymap in X11
-  services.xserver.layout = "us";
+    # TODO: Environmental variables?
+    #environment.variables = (import ../../modules/common/globalvars.nix);
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+    # TODO: Virtualisation?
+    #virtualisation = import (../../modules/virtualisation/default.nix);
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.romatthe = {
-    description = "Robin Mattheussen";
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    hashedPassword = "$6$3jnb5.ogAjaHO7t$.bz.QVZVPTPUe75.0HuTPhThVgrH9GFyuvqUwyTvtNvKFumw3WckiOnEfmoy/Ojewf2HwH0PLnc4Hc7bKqw57/";
-  };
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.UTF-8";
+    console = {
+        font = "Lat2-Terminus16";
+        keyMap = "us";
+    };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget vim git htop
-  ];
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+    # Configure keymap in X11
+    services.xserver.layout = "us";
+    services.xserver.deviceSection = ''
+        Option "TearFree" "true"
+    '';
 
-  # List services that you want to enable:
+    services.avahi.enable = true;
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+    # Enable sound.
+    sound.enable = true;
+    hardware.pulseaudio.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.romatthe = {
+        description = "Robin Mattheussen";
+        isNormalUser = true;
+        shell = pkgs.zsh;
+        extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+        hashedPassword = "$6$3jnb5.ogAjaHO7t$.bz.QVZVPTPUe75.0HuTPhThVgrH9GFyuvqUwyTvtNvKFumw3WckiOnEfmoy/Ojewf2HwH0PLnc4Hc7bKqw57/";
+    };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    environment.systemPackages = with pkgs; [
+        wget vim git htop
+    ];
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    programs.gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+    };
+
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
+
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
+
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "20.09"; # Did you read the comment?
 }
 
