@@ -4,39 +4,30 @@
 
 { config, pkgs, inputs, ... }:
 
-let
-    nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
-in
+#let
+#    nixpkgs-unstable = import inputs.nixpkgs-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
+#in
 {
   imports = [
-    ../modules/emacs
+#    ../modules/emacs
     #../modules/sway
     #../modules/sway/waybar.nix
-    ../modules/terminal
+#    ../modules/terminal
     #../modules/xmonad
     #../modules/xmonad/compositor
     #../modules/xmonad/dunst
     #../modules/xmonad/lockscreen
     #../modules/xmonad/polybar
-    ../modules/chat.nix
-    ../modules/dir-env.nix
-    ../modules/firefox.nix
-    ../modules/git.nix
-    ../modules/gnome.nix
-    ../modules/jetbrains.nix
-    ../modules/music.nix
-    ../modules/programming.nix
-    ../modules/virt.nix
+#    ../modules/chat.nix
+#    ../modules/dir-env.nix
+#    ../modules/firefox.nix
+#    ../modules/git.nix
+#    ../modules/gnome.nix
+#    ../modules/jetbrains.nix
+#    ../modules/music.nix
+#    ../modules/programming.nix
+#    ../modules/virt.nix
   ];
-  
-  nix = {
-    package = nixpkgs-unstable.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
-  };
 
   # Forgive me Stallman
   nixpkgs.config = { allowUnfree = true; };
