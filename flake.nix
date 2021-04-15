@@ -39,7 +39,7 @@
         specialArgs = { inherit inputs; };
       };
 
-      # Hiroshima, cheap laptop at home
+      # Hiroshima, cheap home laptop
       hiroshima = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
