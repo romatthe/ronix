@@ -1,66 +1,66 @@
 {
-  description = "Collection of my systems configured through Nix flakes";
+    description = "Collection of my systems configured through Nix flakes";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-20.09";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-extra = {
-      url = "github:romatthe/nixpkgs-extra";
-      inputs.nixpkgs.follows = "nixpkgs";
+    inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-20.09";
+        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+        nixpkgs-master.url = "github:nixos/nixpkgs/master";
+        nixpkgs-extra = {
+            url = "github:romatthe/nixpkgs-extra";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        nur.url = "github:nix-community/NUR";
+        emacs.url = "github:nix-community/emacs-overlay";
+
+        home-manager = {
+            url = "github:rycee/home-manager/release-20.09";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    nur.url = "github:nix-community/NUR";
-    emacs.url = "github:nix-community/emacs-overlay";
+    outputs = { self, nixpkgs, nur, home-manager, ... } @ inputs:
+        let
+            inherit (builtins) listToAttrs attrValues attrNames readDir;
+            inherit (nixpkgs) lib;
+            inherit (lib) removeSuffix;
 
-    home-manager = {
-      url = "github:rycee/home-manager/release-20.09";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  outputs = { self, nixpkgs, nur, home-manager, ... } @ inputs:
-    let
-        inherit (builtins) listToAttrs attrValues attrNames readDir;
-        inherit (nixpkgs) lib;
-        inherit (lib) removeSuffix;
-
-        pkgs = (import nixpkgs) {
-            system = "x86_64-linux";
-            config = {
-                # Forgive me Stallman
-                allowUnfree = true;
+            pkgs = (import nixpkgs) {
+                system = "x86_64-linux";
+                config = {
+                    # Forgive me Stallman
+                    allowUnfree = true;
+                };
+                overlays = attrValues self.overlays;
             };
-            overlays = attrValues self.overlays;
-        };
 
-        defaults = { pkgs, ... }: {
-            imports = [
-#                ./cachix.nix
-                ./modules/common/nix.nix
-#                ./modules/common/doas.nix
-#                ./modules/common/console.nix
-#                ./modules/hardware/bluetooth.nix
-#                ./modules/hardware/zram.nix
-#                ./modules/hardware/earlyoom.nix
-#                ./modules/common/etcfiles.nix
-#                ./modules/common/systempackages.nix
-#                ./modules/common/globallocale.nix
-#                ./modules/services/pulseaudio.nix
-#                ./modules/services/clamav.nix
-#                ./modules/services/openssh.nix
-            ];
-        };
-    in
-    {
-        overlays =
-            let
-                overlayFiles = listToAttrs (map
-                    (name: {
-                        name = removeSuffix ".nix" name;
-                        value = import (./overlays + "/${name}");
-                    })
-                    (attrNames (readDir ./overlays)));
+            defaults = { pkgs, ... }: {
+                imports = [
+#                    ./cachix.nix
+                    ./modules/common/nix.nix
+#                   ./modules/common/doas.nix
+#                   ./modules/common/console.nix
+#                   ./modules/hardware/bluetooth.nix
+#                   ./modules/hardware/zram.nix
+#                   ./modules/hardware/earlyoom.nix
+#                   ./modules/common/etcfiles.nix
+#                   ./modules/common/systempackages.nix
+#                   ./modules/common/globallocale.nix
+#                   ./modules/services/pulseaudio.nix
+#                   ./modules/services/clamav.nix
+#                   ./modules/services/openssh.nix
+                ];
+            };
+        in
+        {
+            overlays =
+                let
+                    overlayFiles = listToAttrs (map
+                        (name: {
+                            name = removeSuffix ".nix" name;
+                            value = import (./overlays + "/${name}");
+                        })
+                        (attrNames (readDir ./overlays)));
                 in
                     overlayFiles // {
                         nur = final: prev: {
@@ -86,77 +86,53 @@
                     };
 
 
-        # Systems
-        nixosConfigurations = {
+            # Systems
+            nixosConfigurations = {
       
-            # Yokohama, home desktop workhorse
-            yokohama = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                modules = [
-                    defaults
-                    # TODO: System packages here!
-                    (import ./hardware/yokohama-hardware.nix)
-                    (import ./machines/yokohama.nix)
-                    home-manager.nixosModules.home-manager
-                        ({
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.users.romatthe = { ... }: {
-                                imports = [
-                                    # TODO Home Manager imports here!
-                                ];
-                            };
-                        })
-                ];
-                inherit pkgs;
-            };
+                # Yokohama, home desktop workhorse
+                yokohama = nixpkgs.lib.nixosSystem {
+                    system = "x86_64-linux";
+                    modules = [
+                        defaults
+                        # TODO: System packages here!
+                        (import ./hardware/yokohama-hardware.nix)
+                        (import ./machines/yokohama.nix)
+                        home-manager.nixosModules.home-manager
+                            ({
+                                home-manager.useGlobalPkgs = true;
+                                home-manager.useUserPackages = true;
+                                home-manager.users.romatthe = { ... }: {
+                                    imports = [
+                                        # TODO Home Manager imports here!
+                                    ];
+                                };
+                            })
+                    ];
+                    inherit pkgs;
+                };
 
-#            # Hiroshima, cheap laptop at home
-#            hiroshima = nixpkgs.lib.nixosSystem {
-#                system = "x86_64-linux";
-#                modules = [
-#                    defaults
-#                    # TODO: System packages here!
-#                    (import ./hardware/hiroshima-hardware.nix)
-#                    (import ./machines/hiroshima.nix)
-#                    home-manager.nixosModules.home-manager
-#                        ({
-#                            home-manager.useGlobalPkgs = true;
-#                            home-manager.useUserPackages = true;
-#                            home-manager.users.romatthe = { ... }: {
-#                                imports = [
-#                                    # TODO Home Manager imports here!
-#                                ];
-#                            };
-#                        })
-#                ];
-#                inherit pkgs;
-#            };
+                # Hiroshima, cheap laptop at home
+#                hiroshima = nixpkgs.lib.nixosSystem {
+#                    system = "x86_64-linux";
+#                    modules = [
+#                        defaults
+#                        # TODO: System packages here!
+#                        (import ./hardware/hiroshima-hardware.nix)
+#                        (import ./machines/hiroshima.nix)
+#                        home-manager.nixosModules.home-manager
+#                            ({
+#                                home-manager.useGlobalPkgs = true;
+#                                home-manager.useUserPackages = true;
+#                                home-manager.users.romatthe = { ... }: {
+#                                    imports = [
+#                                        # TODO Home Manager imports here!
+#                                    ];
+#                                };
+#                            })
+#                    ];
+#                    inherit pkgs;
+#                };
 
         };
     };
 }
-
-#      # Hiroshima, cheap laptop at home
-#      hiroshima = nixpkgs.lib.nixosSystem {
-#        system = "x86_64-linux";
-#        modules = [
-#          inputs.home-manager.nixosModules.home-manager
-#
-#          { nixpkgs.overlays = [
-#              inputs.emacs.overlay
-#              inputs.nixpkgs-extra.overlay
-#              inputs.nur.overlay
-#            ];
-#          }
-#
-#          (import ./hardware/hiroshima-hardware.nix)
-#          (import ./machines/hiroshima.nix)
-#        ];
-#        specialArgs = { inherit inputs; };
-#      };
-#    };
-#
-#    yokohama = self.nixosConfigurations.yokohama.config.system.build.toplevel;
-#    hiroshima = self.nixosConfigurations.hiroshima.config.system.build.toplevel;
-#
