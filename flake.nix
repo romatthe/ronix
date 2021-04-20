@@ -39,14 +39,14 @@
 #                    ./cachix.nix
                     ./modules/common/nix.nix
 #                   ./modules/common/doas.nix
-#                   ./modules/common/console.nix
-#                   ./modules/hardware/bluetooth.nix
+                    ./modules/common/console.nix
+                    ./modules/hardware/bluetooth.nix
+                    ./modules/hardware/pulseaudio.nix
 #                   ./modules/hardware/zram.nix
 #                   ./modules/hardware/earlyoom.nix
 #                   ./modules/common/etcfiles.nix
 #                   ./modules/common/systempackages.nix
 #                   ./modules/common/globallocale.nix
-#                   ./modules/services/pulseaudio.nix
 #                   ./modules/services/clamav.nix
 #                   ./modules/services/openssh.nix
                 ];
@@ -95,6 +95,7 @@
                     modules = [
                         defaults
                         # TODO: System packages here!
+                        ./modules/common/xserver.nix
                         (import ./hardware/yokohama-hardware.nix)
                         (import ./machines/yokohama.nix)
                         home-manager.nixosModules.home-manager
@@ -103,6 +104,7 @@
                                 home-manager.useUserPackages = true;
                                 home-manager.users.romatthe = { ... }: {
                                     imports = [
+                                        ./machines/yokohama-home.nix
                                         # TODO Home Manager imports here!
                                     ];
                                 };
@@ -116,6 +118,7 @@
 #                    system = "x86_64-linux";
 #                    modules = [
 #                        defaults
+#                        ./modules/hardware/libinput.nix
 #                        # TODO: System packages here!
 #                        (import ./hardware/hiroshima-hardware.nix)
 #                        (import ./machines/hiroshima.nix)
@@ -125,6 +128,7 @@
 #                                home-manager.useUserPackages = true;
 #                                home-manager.users.romatthe = { ... }: {
 #                                    imports = [
+#                                        ./machines/yokohama-home.nix
 #                                        # TODO Home Manager imports here!
 #                                    ];
 #                                };
