@@ -1,11 +1,22 @@
 {
     programs.alacritty.enable = true;
+    programs.alacritty.settings.env.TERM = "xterm-256color";
+    programs.alacritty.settings.background_opacity = 0.5;
+    programs.alacritty.settings.window.decorations = "none";
+    programs.alacritty.settings.window.startup_mode = "Windowed";
+    programs.alacritty.settings.scrolling = {
+        history = 10000;
+        multiplier = 3;
+    };
+    programs.alacritty.settings.window.dynamic_padding = false;
+    programs.alacritty.settings.window.padding = {
+        x = 12;
+        y = 0;
+    };
 
     programs.alacritty.settings.cursor = {
         style = "Block";
     };
-
-    programs.alacritty.settings.background_opacity = 0.5;
 
     programs.alacritty.settings.font = {
         normal = {
@@ -30,6 +41,29 @@
             y = 0;
         };
     };
+
+    programs.alacritty.settings.key_bindings = [
+      {
+        key = "V";
+        mods = "Control|Shift";
+        action = "Paste";
+      }
+      {
+        key = "C";
+        mods = "Control|Shift";
+        action = "Copy";
+      }
+      {
+        key = "Up";
+        mods = "Control|Shift";
+        action = "ScrollPageUp";
+      }
+      {
+        key = "Down";
+        mods = "Control|Shift";
+        action = "ScrollPageDown";
+      }
+    ];
 
     programs.alacritty.settings.colors = {
         # Default colors

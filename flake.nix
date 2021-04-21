@@ -111,6 +111,8 @@
                                     imports = [
                                         ./machines/yokohama-home.nix
                                         ./modules/terminal/alacritty.nix
+                                        ./modules/terminal/fish.nix
+                                        ./modules/terminal/starship.nix
                                         # TODO Home Manager imports here!
                                     ];
                                 };
@@ -140,6 +142,8 @@
 #                                    imports = [
 #                                        ./machines/hiroshima-home.nix
 #                                        ./modules/terminal/alacritty.nix
+#                                        ./modules/terminal/fish.nix
+#                                        ./modules/terminal/starship.nix
 #                                        # TODO Home Manager imports here!
 #                                    ];
 #                                };
