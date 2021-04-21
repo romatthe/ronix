@@ -19,6 +19,8 @@
         };
     };
 
+    # TODO: Apply Nord theme to every module!!!
+
     outputs = { self, nixpkgs, nur, home-manager, ... } @ inputs:
         let
             inherit (builtins) listToAttrs attrValues attrNames readDir;
@@ -37,13 +39,14 @@
             defaults = { pkgs, ... }: {
                 imports = [
 #                    ./cachix.nix
+                    ./modules/common/etcfiles.nix
                     ./modules/common/nix.nix
 #                   ./modules/common/doas.nix
                     ./modules/common/console.nix
                     ./modules/hardware/bluetooth.nix
+                    ./modules/hardware/earlyoom.nix
                     ./modules/hardware/pulseaudio.nix
 #                   ./modules/hardware/zram.nix
-#                   ./modules/hardware/earlyoom.nix
 #                   ./modules/common/etcfiles.nix
 #                   ./modules/common/systempackages.nix
 #                   ./modules/common/globallocale.nix
@@ -95,7 +98,9 @@
                     modules = [
                         defaults
                         # TODO: System packages here!
+                        ./modules/common/fonts.nix
                         ./modules/common/xserver.nix
+                        ./modules/hardware/ssd.nix
                         (import ./hardware/yokohama-hardware.nix)
                         (import ./machines/yokohama.nix)
                         home-manager.nixosModules.home-manager
@@ -105,6 +110,7 @@
                                 home-manager.users.romatthe = { ... }: {
                                     imports = [
                                         ./machines/yokohama-home.nix
+                                        ./modules/terminal/alacritty.nix
                                         # TODO Home Manager imports here!
                                     ];
                                 };
@@ -118,7 +124,11 @@
 #                    system = "x86_64-linux";
 #                    modules = [
 #                        defaults
+#                        ./modules/common/fonts.nix
+#                        ./modules/common/xserver.nix
 #                        ./modules/hardware/libinput.nix
+#                        ./modules/hardware/ssd.nix
+#                        ./modules/hardware/tlp.nix
 #                        # TODO: System packages here!
 #                        (import ./hardware/hiroshima-hardware.nix)
 #                        (import ./machines/hiroshima.nix)
@@ -128,7 +138,8 @@
 #                                home-manager.useUserPackages = true;
 #                                home-manager.users.romatthe = { ... }: {
 #                                    imports = [
-#                                        ./machines/yokohama-home.nix
+#                                        ./machines/hiroshima-home.nix
+#                                        ./modules/terminal/alacritty.nix
 #                                        # TODO Home Manager imports here!
 #                                    ];
 #                                };
